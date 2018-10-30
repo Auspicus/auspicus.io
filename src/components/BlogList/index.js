@@ -8,7 +8,7 @@ const BlogList = props => {
   const limit = props.limit || 3;
   let loadingBlogs = props.loading === false
     ? props.blogs
-    : [{}, {}, {}];
+    : Array(limit).fill({});
   let blogs = loadingBlogs
     .filter((_, i) => i < limit)
     .map((blog, i) => {
@@ -20,14 +20,14 @@ const BlogList = props => {
       let timeToRead;
       
       if (props.loading === false) {
-        slug = blog.fields.slug;
-        title = blog.fields.title;
-        published = blog.fields.published;
-        timeToRead = Math.floor(blog.fields.body.split(' ').length / 150);
+        slug = blog.slug;
+        title = blog.title;
+        published = blog.published;
+        timeToRead = Math.floor(blog.body.split(' ').length / 150);
 
-        if (blog.fields.teaser) {
-          imgSrc = blog.fields.teaser.fields.file.url;
-          imgAlt = blog.fields.teaser.fields.title;
+        if (blog.teaser) {
+          imgSrc = blog.teaser.fields.file.url;
+          imgAlt = blog.teaser.fields.title;
         }
       }
 

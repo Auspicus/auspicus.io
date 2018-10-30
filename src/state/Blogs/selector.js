@@ -1,3 +1,10 @@
+export const getBlogsN = (blogStore, sort, n) =>
+  blogStore
+  .blogs
+  .map(blog => blog.fields)
+  .sort(sort)
+  .slice(0, n);
+
 export const getBlogsOfCategory = blogStore => 
   blogStore
   .blogs

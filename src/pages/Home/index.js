@@ -10,6 +10,7 @@ import BlogList from '../../components/BlogList';
 import CallToAction from '../../components/CallToAction';
 
 import { fetchBlogs } from '../../state/Blogs/actions';
+import { getBlogsN } from '../../state/Blogs/selector';
 import { fetchProjects } from '../../state/Projects/actions';
 import { toggleMenu } from '../../state/Menu/actions';
 
@@ -116,7 +117,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  blogs: state.blogs.blogs,
+  blogs: getBlogsN(state.blogs, (a, b) => new Date(Date.parse(a.published)) < new Date(Date.parse(b.published)), 3),
   loadingBlogs: state.blogs.fetching,
   projects: state.projects.projects,
   loadingProjects: state.projects.fetching,
